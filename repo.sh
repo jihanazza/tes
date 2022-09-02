@@ -3,8 +3,10 @@
 sync () {
     cd ~/rom
     repo init --depth=1 --no-repo-verify -u https://github.com/CherishOS/android_manifest.git -b twelve-one -g default,-mips,-darwin,-notdefault
-    git clone https://github.com/ariffjenong/local_manifest.git --depth=1 -b cherish-12.1 .repo/local_manifests
+    #git clone https://github.com/ariffjenong/local_manifest.git --depth=1 -b cherish-12.1 .repo/local_manifests
     repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j24
+    rm -rf .repo
+    find . -type d -name .git -exec rmdir {} \;
 }
 
 build () {
@@ -29,34 +31,14 @@ build () {
 compile () {
     sync
     echo "done."
-    build
-}
-
-push_kernel () {
-  cd ~/rom/kernel/sony/ms*
-  git #push github HEAD:refs/heads/cherish-12
-}
-
-push_device () {
-  cd ~/rom/device/sony/maple_dsds
-  git #push github HEAD:cherish-12 -f
-}
-
-push_yoshino () {
-  cd ~/rom/device/sony/yos*
-  git #push github HEAD:cherish-12 -f
-}
-
-push_vendor () {
-  cd ~/rom/vendor/sony/maple_dsds
-  git #push github HEAD:cherish-12 -f
+    #build
 }
 
 cd ~/rom
 ls -lh
-compile &
-sleep 114m
-kill %1
+compile #&
+#sleep 114m
+#kill %1
 #push_kernel
 #push_device
 #push_yoshino

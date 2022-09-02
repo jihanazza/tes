@@ -63,9 +63,18 @@ get_out () {
   ls -lh
 }
 
+get_source () {
+  cd ~
+  time com rom 9
+  time rclone copy rom.tar.* znxtproject:rom/$ROM_PROJECT -P
+  time rm rom.tar.*
+  ls -lh
+}
+
 #get_selinux
-get_ccache
+#get_ccache
 #get_out
+get_rom
 
 # Lets see machine specifications and environments
   df -h
