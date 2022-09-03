@@ -31,6 +31,7 @@ task:
 
   Out_background_script:
       - time rclone copy znxtproject:ccache/$ROM_PROJECT/out.tar.zst ~/rom -P
+      - cd ~/rom
       - time tar -xaf out.tar.zst
       - time rm -rf out.tar.zst
 
