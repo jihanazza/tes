@@ -74,7 +74,7 @@ get_source () {
 #get_selinux
 #get_ccache
 #get_out
-get_rom
+get_source
 
 # Lets see machine specifications and environments
   df -h
