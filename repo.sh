@@ -18,12 +18,9 @@ build () {
      export BUILD_HOSTNAME=znxt
      export BUILD_USERNAME=znxt
      export TZ=Asia/Jakarta
-     lunch cherish_maple_dsds-user
-    #make sepolicy -j24
-    #make bootimage -j24
-    #make systemimage &
+     lunch cherish_maple_dsds-user &
     #make installclean
-    mka bacon -j30
+    #mka bacon -j30
 }
 
 compile () {
@@ -32,31 +29,11 @@ compile () {
     build
 }
 
-push_kernel () {
-  cd ~/rom/kernel/sony/ms*
-  git #push github HEAD:refs/heads/cherish-12
-}
-
-push_device () {
-  cd ~/rom/device/sony/maple_dsds
-  git #push github HEAD:cherish-12 -f
-}
-
-push_yoshino () {
-  cd ~/rom/device/sony/yos*
-  git #push github HEAD:cherish-12 -f
-}
-
-push_vendor () {
-  cd ~/rom/vendor/sony/maple_dsds
-  git #push github HEAD:cherish-12 -f
-}
-
 cd ~/rom
 ls -lh
-compile &
-sleep 114m
-kill %1
+compile #&
+#sleep 114m
+#kill %1
 #push_kernel
 #push_device
 #push_yoshino
