@@ -49,5 +49,6 @@ task:
       #- ./build_zip.sh
 
   SF_script:
+      - ./sf.sh
       - cd ~ && rm -rf rom/out/product
       #- ./sf.sh
