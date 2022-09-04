@@ -1,5 +1,6 @@
 #!/bin/bash
 
+send_maple_dsds () {
 cd ~/rom/out/target/product/maple_dsds
 
 
@@ -22,7 +23,10 @@ expect \"100%\"
 expect \"sftp>\"
 send \"bye\r\"
 interact"
+}
 
+
+send_maple () {
 cd ~/rom/out/target/product/maple
 
 
@@ -45,3 +49,7 @@ expect \"100%\"
 expect \"sftp>\"
 send \"bye\r\"
 interact"
+}
+
+#send_maple_dsds
+send_maple
