@@ -26,7 +26,7 @@ task:
 
   Download_background_script:
       #- time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz ~ -P
-      - time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.zst ~ -P
+      - time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.zstt ~ -P
       - ./setup.sh
 
   Out_background_script:

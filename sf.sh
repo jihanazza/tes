@@ -9,7 +9,7 @@ product_gapps=Nusantara-v4.8-12L-maple-Gapps-04092022-OFFICIAL-1504.zip
 product_dsds_vanilla=Nusantara-v4.8-12L-maple_dsds-04092022-OFFICIAL-1350.zip
 product_dsds_gapps=Nusantara-v4.8-12L-maple_dsds-Gapps-04092022-OFFICIAL-1607.zip
 #md5sum=$(ls *.md5sum)
-project=znxt-project/maple
+project=nusantaraproject/maple
 
 # Upload
 expect -c "
