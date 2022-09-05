@@ -30,8 +30,10 @@ task:
       - ./setup.sh
 
   Out_background_script:
-      - time rclone copy znxtproject:CherishOS/maple/Cherish-OS-v3.9.5-20220904-0237-maple-UNOFFICIAL-GApps.zip ~/rom/out/target/product/maple -P
-      - time rclone copy znxtproject:CherishOS/maple_dsds/Cherish-OS-v3.9.5-20220903-1859-maple_dsds-UNOFFICIAL-GApps.zip ~/rom/out/target/product/maple_dsds -P
+      - time rclone copy znxtproject:NusantaraProject/maple/Nusantara-v4.8-12L-maple-04092022-OFFICIAL-1424.zip ~/rom/out/target/product/maple -P
+      - time rclone copy znxtproject:NusantaraProject/maple/Nusantara-v4.8-12L-maple-Gapps-04092022-OFFICIAL-1504.zip ~/rom/out/target/product/maple -P
+      - time rclone copy znxtproject:NusantaraProject/maple_dsds/Nusantara-v4.8-12L-maple_dsds-04092022-OFFICIAL-1350.zip ~/rom/out/target/product/maple -P
+      - time rclone copy znxtproject:NusantaraProject/maple_dsds/Nusantara-v4.8-12L-maple_dsds-Gapps-04092022-OFFICIAL-1607.zip ~/rom/out/target/product/maple -P
 
   Retry_background_script:
       - ./retry.sh

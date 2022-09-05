@@ -1,12 +1,15 @@
 #!/bin/bash
 
-send_maple_dsds () {
-cd ~/rom/out/target/product/maple_dsds
+send_maple () {
+cd ~/rom/out/target/product/maple
 
 
-product=$(ls *maple_dsds*OFFICIAL*.zip)
+product_vanilla=Nusantara-v4.8-12L-maple-04092022-OFFICIAL-1424.zip
+product_gapps=Nusantara-v4.8-12L-maple-Gapps-04092022-OFFICIAL-1504.zip
+product_dsds_vanilla=Nusantara-v4.8-12L-maple_dsds-04092022-OFFICIAL-1350.zip
+product_dsds_gapps=Nusantara-v4.8-12L-maple_dsds-Gapps-04092022-OFFICIAL-1607.zip
 #md5sum=$(ls *.md5sum)
-project=xperia-xz-premium/CherishOS/twelve-one/maple_dsds
+project=znxt-project/maple
 
 # Upload
 expect -c "
@@ -17,33 +20,21 @@ expect \"Password\"
 send \"$SF_PASS\r\"
 set timeout -1
 expect \"sftp>\"
-send \"put $product\r\"
+send \"put $product_vanilla\r\"
 expect \"Uploading\"
 expect \"100%\"
 expect \"sftp>\"
-send \"bye\r\"
-interact"
-}
-
-
-send_maple () {
-cd ~/rom/out/target/product/maple
-
-
-maple=$(ls *maple*OFFICIAL*.zip)
-#maple_md5sum=$(ls *.md5sum)
-project_maple=xperia-xz-premium/CherishOS/twelve-one/maple
-
-# Upload
-expect -c "
-spawn sftp $SF_USERNAME@frs.sourceforge.net:/home/pfs/project/$project_maple
-expect \"yes/no\"
-send \"yes\r\"
-expect \"Password\"
-send \"$SF_PASS\r\"
-set timeout -1
+send \"put $product_gapps\r\"
+expect \"Uploading\"
+expect \"100%\"
 expect \"sftp>\"
-send \"put $maple\r\"
+send \"cd ../maple_dsds\r\"
+expect \"sftp>\"
+send \"put $product_dsds_vanilla\r\"
+expect \"Uploading\"
+expect \"100%\"
+expect \"sftp>\"
+send \"put $product_dsds_gapps\r\"
 expect \"Uploading\"
 expect \"100%\"
 expect \"sftp>\"

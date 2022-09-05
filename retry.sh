@@ -1,39 +1,36 @@
 #!/bin/bash
 
-# Sorting final zip
-compiled_zip() {
-	ZIP=$(find $(pwd)/out/target/product/maple_dsds/ -maxdepth 1 -name "*maple_dsds*.zip" | perl -e 'print sort { length($b) <=> length($a) } <>' | head -n 1)
-	ZIPNAME=$(basename ${ZIP})
+send_maple () {
+cd ~/rom/out/target/product/gapps
+
+
+product=$(ls *maple_dsds*OFFICIAL*.zip)
+product_dsds=$(ls *maple_dsds*OFFICIAL*.zip)
+#md5sum=$(ls *.md5sum)
+project=nusantaraproject/maple
+
+# Upload
+expect -c "
+spawn sftp $SF_USERNAME@frs.sourceforge.net:/home/pfs/project/$project
+expect \"yes/no\"
+send \"yes\r\"
+expect \"Password\"
+send \"$SF_PASS\r\"
+set timeout -1
+expect \"sftp>\"
+send \"put $product\r\"
+expect \"Uploading\"
+expect \"100%\"
+expect \"sftp>\"
+send \"cd ../maple_dsds\r\"
+expect \"sftp>\"
+send \"put $product_dsds\r\"
+expect \"Uploading\"
+expect \"100%\"
+expect \"sftp>\"
+send \"bye\r\"
+interact"
 }
 
-# Retry the ccache fill for 99-100% hit rate
-retry_ccache () {
-    export CCACHE_DIR=~/ccache
-    export CCACHE_EXEC=$(which ccache)
-	hit_rate=$(ccache -s | awk '/hit rate/ {print $4}' | cut -d'.' -f1)
-	if [ $hit_rate -lt 99 ]; then
-		git clone ${TOKEN}/jihanazza/Work -b cherish_dsds-12.1 clone && cd clone
-		git commit --allow-empty -m "Retry: Ccache loop $(date -u +"%D %T%p %Z")"
-		git push -q
-	else
-		echo "Ccache is fully configured"
-		git clone ${TOKEN}/jihanazza/Work -b cherish_dsds-12.1 clone && cd clone
-		git commit --allow-empty -m "Retry Build $(date -u +"%D %T%p %Z")"
-		git push -q
-	fi
-}
-
-# Trigger retry only if compilation is not finished
-retry_event() {
-	if [ -f $(pwd)/out/target/product/maple_dsds/${ZIPNAME} ]; then
-		echo "Successful Build"
-	else
-		retry_ccache
-	fi
-}
-
-cd ~/rom
-sleep 119m
-#sleep 7191
-compiled_zip
-retry_event
+#send_maple_dsds
+#send_maple
